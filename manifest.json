@@ -2,15 +2,18 @@
     "manifest_version": 2,
     "name": "Fila atendimento converja",
     "version": "1.0",
-    "description": "Verifica ligações na fila de espera e notifica caso tenha alguma ligação parada",
+    "description": "Verifica ligações em fila",
     "permissions": [
         "activeTab",
-        "notifications"
+        "notifications",
+        "http://*/*",
+        "tabs"
     ],
 
-    "content_scripts": [{
-        "matches": ["*://*"],
-        "js": ["js/contentScript.js"],
-        "run_at":"document_end"
+    "content_scripts": [
+    {
+        "matches": ["*://platform.converja.com/*"],
+        "js": ["js/content.js"],
+        "run_at": "document_end"
     }]
 }

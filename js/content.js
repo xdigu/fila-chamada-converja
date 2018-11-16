@@ -1,45 +1,29 @@
 // Executa a função em um intervalo (1000 = 1s)
 var tempoIntervaloVerificarChamada = 5000
-
+var oldValue
 
 window.setInterval(function () {
-    
-    // Envia uma notificação que o monitoramento foi ativado
-    var notificacaoInicial
-    if (notificacaoInicial == null) {
-        notification(
-            "Converja",
-            "Estamos monitorando as chamadas em espera, caso tenha alguma iremos lhe avisar",
-            false
-        )
-        notificacaoInicial = true
-    }
-
     // Pega as chamadas pelo id do elemento
-    let chamadas = document.getElementById('')
+    var chamadas = document.getElementById('label-1033')
 
     if (chamadas) {
         chamadas = chamadas.innerHTML.substr(18, 2)
 
-        var oldValue
         if (chamadas != oldValue) {
+            oldValue = chamadas
+
             if (chamadas > 0) {
-                oldValue = chamadas
                 notification(
-                    "Nova chamada",
+                    "Chamadas em fila:",
                     `Você tem ${chamadas} chamada(s) na fila`,
                     false
-                )
-            }
-
+                )}
         }
     }
-
 }, tempoIntervaloVerificarChamada)
 
-
+// Função para enviar as notificações
 function notification(title, message, onClick) {
-
     if (!Notification) {
         alert('Sua versão do Google Chrome não suporte esse tipo de Notificação.')
         return
@@ -54,11 +38,4 @@ function notification(title, message, onClick) {
             body: message
         }
     )
-
-    if (onClick) {
-        notification.onclick = function () {
-            var url = "https://github.com/xdigu"
-            window.open(url)
-        }
-    }
 }
