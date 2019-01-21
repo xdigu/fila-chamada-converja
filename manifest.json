@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Fila atendimento converja",
     "version": "1.0",
-    "description": "Verifica ligações em fila",
+    "description": "Verifica se possui ligações na fila",
     "permissions": [
         "activeTab",
         "notifications",

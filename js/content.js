@@ -1,26 +1,31 @@
-// Executa a função em um intervalo (1000 = 1s)
-var tempoIntervaloVerificarChamada = 5000
-var oldValue
+let tempoIntervaloVerificarChamada = 5000
+let oldValue
+const conexao = _ => document.getElementById('messagebox-1001-msg')
+const chamadas = (status) => {
+    let elemento = document.getElementById('label-1033')
+    if (status == 'verificar') {
+        return elemento
+    } else {
+        return elemento.innerHTML.substr(18, 2)
+    }
+}
 
 window.setInterval(function () {
-    // Pega as chamadas pelo id do elemento
-    var chamadas = document.getElementById('label-1033')
+    if (chamadas('verificar')) {
+        if (chamadas() != oldValue) {
+            oldValue = chamadas()
 
-    if (chamadas) {
-        chamadas = chamadas.innerHTML.substr(18, 2)
-
-        if (chamadas != oldValue) {
-            oldValue = chamadas
-
-            if (chamadas > 0) {
-                notification(
-                    "Chamadas em fila:",
-                    `Você tem ${chamadas} chamada(s) na fila`,
-                    false
-                )}
+            if (chamadas() > 0) {
+                notification("Chamadas em fila:", `Você tem ${chamadas()} chamada(s) na fila`, false)
+            }
         }
     }
+
+    if (conexao()) {
+        notification("Peda conexão", "Favor relogar no converja", false)
+    }
 }, tempoIntervaloVerificarChamada)
+
 
 // Função para enviar as notificações
 function notification(title, message, onClick) {
